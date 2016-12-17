@@ -9,11 +9,12 @@
 Tech stack
 ----
 
-- [React](https://facebook.github.io/react/) on front end
+- [React](https://facebook.github.io/react/) for front end
 - [React Router v4](https://github.com/reactjs/react-router) for routing on web app
-- [Express](http://expressjs.com/) on server side
+- [Express](http://expressjs.com/) for server side
 - [Parse](https://parseplatform.github.io/) for API and database
 - [Babel](https://babeljs.io/) for ES6 syntax
 - [ESLint](http://eslint.org/) for linting
 - [Webpack v2](https://webpack.github.io) for bundling
 - [Heroku](https://www.heroku.com) for deployment
+- [Travis CI](https://travis-ci.org) for continues integration
