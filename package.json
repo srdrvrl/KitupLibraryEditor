@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "build": "webpack --progress",
-    "lint": "eslint --ignore-path .gitignore .",
+    "lint": "eslint \"client/**\" \"server/**\"",
     "prebuild": "rimraf build/*",
     "prestart": "npm run build",
     "start": "node server",
