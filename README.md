@@ -11,6 +11,7 @@ Tech stack
 
 - [React](https://facebook.github.io/react/) for front end
 - [React Router v4](https://github.com/reactjs/react-router) for routing on web app
+- [StyledComponents](https://github.com/styled-components/styled-components) for styling
 - [Express](http://expressjs.com/) for server side
 - [Parse](https://parseplatform.github.io/) for API and database
 - [Babel](https://babeljs.io/) for ES6 syntax
@@ -18,3 +19,5 @@ Tech stack
 - [Webpack v2](https://webpack.github.io) for bundling
 - [Heroku](https://www.heroku.com) for deployment
 - [Travis CI](https://travis-ci.org) for continues integration
+
+### [App lives on heroku](http://kitup-library-editor.herokuapp.com)
