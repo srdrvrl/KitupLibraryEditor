@@ -64,6 +64,12 @@ export default {
         ],
       },
     ],
+    loaders: [
+      {
+        test: /\.css$/,
+        loader: 'style!css',
+      },
+    ],
   },
   plugins: [
     new AssetsPlugin({

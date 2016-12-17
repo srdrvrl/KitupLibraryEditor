@@ -12,7 +12,9 @@ export default ({ assets, markup, styles }) => (
       </style>
     </head>
     <body>
-      <div dangerouslySetInnerHTML={{ __html: markup }} id="root" />
+      <div>
+        <div dangerouslySetInnerHTML={{ __html: markup }} id="root" />
+      </div>
       <script src={assets.vendor.js} />
       <script src={assets.main.js} />
     </body>
