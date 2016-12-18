@@ -1,10 +1,11 @@
 import React from 'react';
-import {Layout, Flex, Fixed} from 'react-layout-pane';
+import { Layout, Flex, Fixed } from 'react-layout-pane';
 import ObjectLibrary from './ObjectLibrary';
 import Canvas from './Canvas';
 import Inspector from './Inspector';
 
 export default class Editor extends React.Component {
+
   render() {
     return (
       <div>
