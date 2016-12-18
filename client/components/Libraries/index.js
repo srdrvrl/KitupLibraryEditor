@@ -1,6 +1,5 @@
 import React from 'react';
 import Parse from 'parse';
-import ReactList from 'react-list';
 import Link from 'react-router/Link';
 
 export default class Libraries extends React.Component {
