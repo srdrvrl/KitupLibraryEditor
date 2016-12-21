@@ -6,6 +6,10 @@ import Inspector from './Inspector';
 
 export default class Editor extends React.Component {
 
+  onSave() {
+    console.log('save pressed');
+  }
+
   render() {
     return (
       <div>
@@ -17,10 +21,34 @@ export default class Editor extends React.Component {
             <Canvas />
           </Flex>
           <Fixed style={{ width: '15rem', background: '#2980B9' }}>
-            <Inspector />
+            <Layout type="column">
+              <Flex>
+                <Inspector />
+              </Flex>
+              <Fixed style={{ height: '8rem' }}>
+                <div>
+                  <h1>Project</h1>
+                  <ul>
+                    <li key="save">
+                      <button onPress={this.onSave}>Save</button>
+                    </li>
+                  </ul>
+                </div>
+              </Fixed>
+            </Layout>
           </Fixed>
         </Layout>
       </div>
     );
   }
+
+/*
+  render() {
+    return (
+      <div>
+        <h1>Editor</h1>
+      </div>
+    );
+  }
+*/
 }

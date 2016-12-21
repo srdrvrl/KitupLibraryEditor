@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-expressions */
-import styled, { injectGlobal } from 'styled-components';
+import { injectGlobal } from 'styled-components';
 
 injectGlobal`
   body {

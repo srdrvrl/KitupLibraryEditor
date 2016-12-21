@@ -6,7 +6,7 @@ export default ({ assets, markup, styles }) => (
     <head>
       <meta charSet="utf-8" />
       <meta content="width=device-width, initial-scale=1" name="viewport" />
-      <title>React Starter</title>
+      <title>Kitup Library Editor</title>
       <style type="text/css">
         {styles}
       </style>

@@ -9,7 +9,7 @@ const reactorDataKeys = {
 };
 
 // Create nuclear reactor
-const reactor = Nuclear.Reactor({
+export const reactor = Nuclear.Reactor({
   debug: true,
 });
 
