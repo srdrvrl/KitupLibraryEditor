@@ -1,10 +1,8 @@
 import React from 'react';
 import Parse from 'parse';
-import { fabric } from 'fabric';
 
 import { Layout, Flex, Fixed } from 'react-layout-pane';
 import { LibraryObject, LibraryLevel, Bookshelf, Door, Wall } from '../../Models';
-import { fabricCanvas } from './Canvas/ReactFabricCanvas';
 
 import LibraryInspector from './LibraryInspector';
 import LevelInspector from './LevelInspector';
@@ -52,9 +50,30 @@ export default class Editor extends React.Component {
     return this.state.library.getActiveLevel();
   }
 
-  setActiveLibraryLevel(level) {
+  setActiveLevel(level) {
     const library = this.state.library;
     library.setActiveLevel(level);
+    this.setState({
+      library,
+    });
+  }
+
+  removeActiveLevel() {
+    const library = this.state.library;
+    if (library.levels.length <= 1) {
+      return;
+    }
+
+    const activeLevel = library.getActiveLevel();
+    library.removeLevel(activeLevel);
+    this.setState({
+      library,
+    });
+  }
+
+  addLevel() {
+    const library = this.state.library;
+    library.addLevel();
     this.setState({
       library,
     });
@@ -201,6 +220,9 @@ export default class Editor extends React.Component {
               <Flex>
                 <LibraryInspector
                   library={this.state.library}
+                  onLevelClick={(level) => { this.setActiveLevel(level); }}
+                  onLevelRemove={() => { this.removeActiveLevel(); }}
+                  onLevelCreate={() => { this.addLevel(); }}
                 />
               </Flex>
             </Layout>

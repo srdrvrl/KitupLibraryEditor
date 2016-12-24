@@ -19,7 +19,7 @@ export default class LevelInspector extends React.Component {
     return (
       <div style={{ overflow: 'scroll' }}>
         <h1>Level Inspector</h1>
-        <h3>{this.props.level.items.length} items</h3>
+        <h3>Level {this.props.level.level} - {this.props.level.items.length} items</h3>
         <ul>
           {this.props.level.items.map(this.renderItem.bind(this))}
         </ul>

@@ -19,7 +19,7 @@ export default class LibraryInspector extends React.Component {
         <h1>Library Inspector</h1>
         <div>
           <ul>
-            {this.props.library.levels.map(this.renderLevel)}
+            {this.props.library.levels.map(this.renderLevel.bind(this))}
           </ul>
         </div>
         <div>

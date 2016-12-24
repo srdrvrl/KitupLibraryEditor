@@ -9,12 +9,23 @@ export class LibraryObject {
       new LibraryLevel(),
     ];
 
-    this.setActiveLevel(0);
+    this.setActiveLevel(this.levels[0]);
   }
 
-  setActiveLevel(levelIndex) {
+  addLevel() {
+    const level = new LibraryLevel(this.levels.length);
+    this.levels.push(level);
+    this.setActiveLevel(level);
+  }
+
+  removeLevel(level) {
+    this.levels = this.levels.filter(item => item !== level);
+    this.setActiveLevel(this.levels[0]);
+  }
+
+  setActiveLevel(newLevel) {
     for (let level of this.levels) {
-      level.setActive(level.level === levelIndex);
+      level.setActive(level === newLevel);
     }
   }
 
@@ -49,17 +60,6 @@ export class LibraryLevel {
 
   setActive(active) {
     this.isActive = active;
-
-    if (this.items.length === 0) {
-      return;
-    }
-
-    for (let item of this.items) {
-      item.isActive = false;
-    }
-    if (active) {
-      this.items[0].isActive = true;
-    }
   }
 
   setActiveItem(newItem) {
