@@ -1,42 +1,5 @@
 import React from 'react';
 import { fabric } from 'fabric';
-import Nuclear from 'nuclear-js';
-
-// Nuclear store data keys
-const reactorDataKeys = {
-  fabricData: null,
-  activeObject: null,
-};
-
-// Create nuclear reactor
-export const reactor = Nuclear.Reactor({
-  debug: true,
-});
-
-const fabricStore = Nuclear.Store({
-  getInitialState() {
-    return Nuclear.toImmutable({
-      fabricData: {
-        objects: [],
-      },
-      activeObject: false,
-    });
-  },
-  initialize() {
-    this.on(reactorDataKeys.fabricData, this.saveFabricData);
-    this.on(reactorDataKeys.activeObject, this.saveActiveObject);
-  },
-  saveFabricData(state, fabricData) {
-    return state.set('fabricData', Nuclear.toImmutable(fabricData));
-  },
-  saveActiveObject(state, value) {
-    return state.set('activeObject', value);
-  },
-});
-
-reactor.registerStores({
-  fabricStore,
-});
 
 // Global fabric canvas
 export let fabricCanvas;
@@ -45,19 +8,6 @@ export default class ReactFabricCanvas extends React.Component {
   componentDidMount() {
     // create fabric canvas on element
     fabricCanvas = new fabric.Canvas('fabricCanvas');
-
-    // on mouse up lets save some state
-    fabricCanvas.on('mouse:up', () => {
-      reactor.dispatch(reactorDataKeys.fabricData, fabricCanvas.toObject());
-      reactor.dispatch(reactorDataKeys.activeObject, !!fabricCanvas.getActiveObject());
-    });
-
-    // an event we will fire when we want to save state
-    fabricCanvas.on('saveData', () => {
-      reactor.dispatch(reactorDataKeys.fabricData, fabricCanvas.toObject());
-      reactor.dispatch(reactorDataKeys.activeObject, !!fabricCanvas.getActiveObject());
-      fabricCanvas.renderAll(); // programatic changes we make will not trigger a render in fabric
-    });
 
     this.drawGrid();
     this.addSnapToGrid();
@@ -99,11 +49,12 @@ export default class ReactFabricCanvas extends React.Component {
       return;
     }
 
+    const gridSize = this.props.gridSize;
     fabricCanvas.on({
       'object:moving': (object) => {
         object.target.set({
-          left: Math.round(object.target.left / this.props.gridSize) * this.props.gridSize,
-          top: Math.round(object.target.top / this.props.gridSize) * this.props.gridSize,
+          left: Math.round(object.target.left / gridSize) * gridSize,
+          top: Math.round(object.target.top / gridSize) * gridSize,
         });
       },
     });

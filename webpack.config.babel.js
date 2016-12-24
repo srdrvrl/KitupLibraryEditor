@@ -66,9 +66,20 @@ export default {
     ],
     loaders: [
       {
-        test: /\.css$/,
-        loader: 'style!css',
+        test: /\.css/,
+        loader: 'style-loader!css-loader',
       },
+      {
+        test: /\.scss$/,
+        loaders: ['style-loader', 'css-loader', 'sass-loader'],
+      },
+    ],
+  },
+  resolve: {
+    extensions: [
+      '.js',
+      '.jsx',
+      '.css',
     ],
   },
   plugins: [
