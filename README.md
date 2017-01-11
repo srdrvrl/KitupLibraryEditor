@@ -5,6 +5,8 @@
 - [Boilerplate](https://github.com/richardkall/react-starter)
 - `npm i` after clone project
 - make sure that you have `git` and `npm` installed on your machine
+- `npm run start-dev` to start `express` server on your local.
+- now project lives on your `localhost:3000`
 
 Tech stack
 ----
