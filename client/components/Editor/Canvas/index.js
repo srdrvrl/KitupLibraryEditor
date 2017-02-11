@@ -25,9 +25,15 @@ export default class Canvas extends React.Component {
 
   render() {
     const level = this.props.level;
-    for (const item of level.items) {
-      item.fabricObject.active = item.isActive;
-      fabricCanvas.add(item.fabricObject);
+
+    if (fabricCanvas) {
+      fabricCanvas._objects = fabricCanvas._objects.filter(object => object.name === 'gridLine');
+      for (const item of level.items) {
+        fabricCanvas.add(item.fabricObject);
+        // fabricCanvas._objects.push(item.fabricObject);
+      }
+      // fabricCanvas.renderAll();
+      console.log(fabricCanvas);
     }
 
     const containerStyle = {

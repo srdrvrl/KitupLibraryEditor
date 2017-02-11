@@ -54,7 +54,7 @@ export default class Libraries extends React.Component {
     return (
       <div key={key}>
         <li>
-          {name}
+          <Link to={'/editor/' + key}>{name}</Link>
         </li>
       </div>
     );

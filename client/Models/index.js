@@ -38,10 +38,6 @@ export class LibraryObject {
     }
     return activeLevel;
   }
-
-  save() {
-    // TODO: Save to parse
-  }
 }
 
 export class LibraryLevel {
@@ -60,13 +56,21 @@ export class LibraryLevel {
 
   setActive(active) {
     this.isActive = active;
+
+    if (active && this.items.length > 0) {
+      // make first item active
+      this.items[0].setActive(true);
+    } else {
+      // set all objects deactive
+      this.items.map(item => item.setActive(false));
+    }
   }
 
   setActiveItem(newItem) {
     for (let item of this.items) {
-      item.isActive = false;
+      item.setActive(false);
       if (newItem && (item.id === newItem.id)) {
-        item.isActive = true;
+        item.setActive(true);
       }
     }
   }
@@ -100,6 +104,11 @@ export class LibraryItem {
       fill: '#ccc',
     });
     this.fabricObject.id = this.id;
+  }
+
+  setActive(active) {
+    this.isActive = active;
+    this.fabricObject.active = active;
   }
 }
 

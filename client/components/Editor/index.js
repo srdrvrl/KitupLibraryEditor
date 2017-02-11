@@ -16,17 +16,34 @@ export default class Editor extends React.Component {
     super(props);
 
     this.state = {
-      library: props.library || new LibraryObject(),
+      id: props.id,
+      library: props.id === null ? new LibraryObject() : null,
       itemLibrary: [],
     };
   }
 
   componentDidMount() {
     this.fetchItemLibrary();
+    if (this.props.id !== null) {
+      this.fetchLibrary(
+        this.props.id,
+        (response) => {
+          const fileUrl = response.get('data').url();
+          // TODO: get file
+          this.setState({
+            library: libraryJson,
+          });
+        },
+        (error) => {
+          console.log(error);
+        },
+      );
+    }
   }
 
-  // Fetch
+  // Requests
 
+  // Fetches all Parse.LibraryItem objects
   fetchItemLibrary() {
     const libraryObject = Parse.Object.extend('LibraryObject');
     const query = new Parse.Query(libraryObject);
@@ -42,6 +59,62 @@ export default class Editor extends React.Component {
         });
       },
     });
+  }
+
+  // Saves current state of editor to either a new library or currently editing one.
+  saveLibrary() {
+    const json = JSON.stringify(this.state.library);
+    const base64 = new Buffer(json).toString('base64');
+    const file = new Parse.File('data.json', { base64 });
+    file.save().then(
+      () => {
+        const libraryId = this.state.id;
+        if (libraryId) { // update
+          this.fetchLibrary(
+            libraryId,
+            (library) => {
+              library.set('data', file);
+              library.save();
+            },
+            (error) => {
+              console.log(error);
+            });
+        } else { // add new
+          const ParseLibrary = Parse.Object.extend('Library');
+          const library = new ParseLibrary();
+          library.set('data', file);
+          library.set('name', library.name || 'library');
+          library.set('owner', Parse.User.current());
+          library.save().then(
+            (response) => {
+              this.setState({
+                id: response.id,
+              });
+            },
+            (error) => {
+              console.log(error);
+            });
+        }
+      },
+      (error) => {
+        console.log(error);
+      },
+    );
+  }
+
+  // Fetches Parse.Library object by object id
+  fetchLibrary(id, onSuccess, onFailure) {
+    const parseLibrary = Parse.Object.extend('Library');
+    const query = new Parse.Query(parseLibrary);
+    query.equalTo('objectId', id);
+    query.first().then(
+      (response) => {
+        onSuccess(response);
+      },
+      (error) => {
+        onFailure(error);
+      },
+    );
   }
 
   // Level
@@ -130,7 +203,8 @@ export default class Editor extends React.Component {
 
   onItemDidUpdate(property, value) {
     const item = this.getActiveItem();
-
+    console.log('before');
+    console.log(item.fabricObject);
     switch (property) {
       case 'x':
         item.fabricObject.setLeft(value);
@@ -155,7 +229,8 @@ export default class Editor extends React.Component {
         break;
       default:
     }
-
+    console.log('after');
+    console.log(item.fabricObject);
     this.updateActiveItem(item);
   }
 
@@ -183,6 +258,16 @@ export default class Editor extends React.Component {
   // Render
 
   render() {
+    console.log(this.state.library);
+
+    if (this.state.library == null) {
+      return (
+        <div>
+          <p>Loading..</p>
+        </div>
+      );
+    }
+
     return (
       <div>
         <Layout type="row">
@@ -223,6 +308,7 @@ export default class Editor extends React.Component {
                   onLevelClick={(level) => { this.setActiveLevel(level); }}
                   onLevelRemove={() => { this.removeActiveLevel(); }}
                   onLevelCreate={() => { this.addLevel(); }}
+                  onSave={() => { this.saveLibrary(); }}
                 />
               </Flex>
             </Layout>
@@ -232,7 +318,7 @@ export default class Editor extends React.Component {
     );
   }
 
-/*
+  /*
   render() {
     return (
       <div>
@@ -244,5 +330,5 @@ export default class Editor extends React.Component {
 }
 
 Editor.propTypes = {
-  library: React.PropTypes.shape({ type: React.PropTypes.oneOf([LibraryObject]) }),
+  id: React.PropTypes.string,
 };

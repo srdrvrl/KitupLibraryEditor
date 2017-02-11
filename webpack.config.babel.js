@@ -73,6 +73,10 @@ export default {
         test: /\.scss$/,
         loaders: ['style-loader', 'css-loader', 'sass-loader'],
       },
+      {
+        test: /\.json$/,
+        loader: 'json-loader',
+      },
     ],
   },
   resolve: {
@@ -81,6 +85,10 @@ export default {
       '.jsx',
       '.css',
     ],
+  },
+  node: {
+    net: 'mock',
+    dns: 'mock',
   },
   plugins: [
     new AssetsPlugin({

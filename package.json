@@ -30,6 +30,7 @@
     "express": "4.14.0",
     "fabric": "^1.7.1",
     "file-loader": "0.9.0",
+    "json-loader": "^0.5.4",
     "morgan": "1.7.0",
     "node-sass": "^4.1.1",
     "nuclear-js": "^1.4.0",

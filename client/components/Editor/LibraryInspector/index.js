@@ -17,6 +17,7 @@ export default class LibraryInspector extends React.Component {
     return (
       <div>
         <h1>Library Inspector</h1>
+        <h3>{this.props.library.name}</h3>
         <div>
           <ul>
             {this.props.library.levels.map(this.renderLevel.bind(this))}
@@ -25,6 +26,7 @@ export default class LibraryInspector extends React.Component {
         <div>
           <button onClick={this.props.onLevelCreate}>Add New Level</button>
           <button onClick={this.props.onLevelRemove}>Remove Level</button>
+          <button onClick={this.props.onSave}>Save</button>
         </div>
       </div>
     );
@@ -36,4 +38,5 @@ LibraryInspector.propTypes = {
   onLevelCreate: React.PropTypes.func,
   onLevelRemove: React.PropTypes.func,
   onLevelClick: React.PropTypes.func,
+  onSave: React.PropTypes.func,
 };

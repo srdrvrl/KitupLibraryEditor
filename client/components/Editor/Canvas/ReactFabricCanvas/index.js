@@ -24,7 +24,7 @@ export default class ReactFabricCanvas extends React.Component {
       for (let x = 0; x < width; x += gridSize) {
         const line = new fabric.Line(
           [x, 0, x, height],
-          { stroke: this.props.gridColor, selectable: false });
+          { stroke: this.props.gridColor, selectable: false, name: 'gridLine' });
         gridLines.push(line);
       }
 
@@ -32,7 +32,7 @@ export default class ReactFabricCanvas extends React.Component {
       for (let y = 0; y < height; y += gridSize) {
         const line = new fabric.Line(
           [0, y, width, y],
-          { stroke: this.props.gridColor, selectable: false });
+          { stroke: this.props.gridColor, selectable: false, name: 'gridLine' });
         gridLines.push(line);
       }
 
