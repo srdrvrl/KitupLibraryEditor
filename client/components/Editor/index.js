@@ -1,7 +1,7 @@
 import React from 'react';
 import Parse from 'parse';
 
-import { Layout, Flex, Fixed } from 'react-layout-pane';
+// import { Layout, Flex, Fixed } from 'react-layout-pane';
 import { LibraryObject, LibraryLevel, Bookshelf, Door, Wall } from '../../Models';
 
 import LibraryInspector from './LibraryInspector';
@@ -256,7 +256,7 @@ export default class Editor extends React.Component {
   }
 
   // Render
-
+  /*
   render() {
     console.log(this.state.library);
 
@@ -317,8 +317,8 @@ export default class Editor extends React.Component {
       </div>
     );
   }
+  */
 
-  /*
   render() {
     return (
       <div>
@@ -326,7 +326,6 @@ export default class Editor extends React.Component {
       </div>
     );
   }
-*/
 }
 
 Editor.propTypes = {
