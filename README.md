@@ -5,8 +5,12 @@
 - [Boilerplate](https://github.com/richardkall/react-starter)
 - `npm i` after clone project
 - make sure that you have `git` and `npm` installed on your machine
-- `npm run start-dev` to start `express` server on your local.
-- now project lives on your `localhost:3000`
+
+## Changes done in v1.01
+- `react-layout-pane` is removed.
+- Design is redesigned by css codes in order to fix opening bug.
+- ReactDOM is imported in Editor/index.js in order to use "style" attribute.
+- css loader in webpack file is updated.
 
 Tech stack
 ----

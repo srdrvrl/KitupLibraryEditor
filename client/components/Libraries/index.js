@@ -17,6 +17,10 @@ export default class Libraries extends React.Component {
     this.fetchLibraries();
   }
 
+  onLogout() {
+    Parse.User.logOut();
+  }
+
   fetchLibraries() {
     this.setState({
       isLoading: true,
@@ -28,7 +32,6 @@ export default class Libraries extends React.Component {
     query.equalTo('owner', Parse.User.current());
     query.find({
       success: (response) => {
-        console.log('success');
         this.setState({
           isLoading: false,
           libraries: response,
@@ -51,7 +54,7 @@ export default class Libraries extends React.Component {
     return (
       <div key={key}>
         <li>
-          {name}
+          <Link to={'/editor/' + key}>{name}</Link>
         </li>
       </div>
     );
@@ -60,6 +63,12 @@ export default class Libraries extends React.Component {
   renderNewLibraryButton() {
     return (
       <Link to="/editor">Add new library</Link>
+    );
+  }
+
+  renderLogoutButton() {
+    return (
+      <button onClick={this.onLogout}>Logout</button>
     );
   }
 
@@ -76,6 +85,7 @@ export default class Libraries extends React.Component {
           <h1>Libraries</h1><br />
           <h3>You have no libraries</h3><br />
           { this.renderNewLibraryButton() }
+          { this.renderLogoutButton() }
         </div>
       );
     }
@@ -89,6 +99,8 @@ export default class Libraries extends React.Component {
           </ul>
         </div>
         { this.renderNewLibraryButton() }
+        <br />
+        { this.renderLogoutButton() }
       </div>
     );
   }
