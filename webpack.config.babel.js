@@ -4,6 +4,7 @@ import AssetsPlugin from 'assets-webpack-plugin';
 import webpack from 'webpack';
 
 const isProduction = process.env.NODE_ENV === 'production';
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 export default {
   entry: {
@@ -65,13 +66,37 @@ export default {
       },
     ],
     loaders: [
+
       {
         test: /\.css$/,
-        loader: 'style!css',
+        use: ExtractTextPlugin.extract({
+          fallback: "style-loader",
+          use: "css-loader"
+        }),
+      },
+      {
+        test: /\.scss$/,
+        loaders: ['style-loader', 'css-loader', 'sass-loader'],
+      },
+      {
+        test: /\.json$/,
+        loader: 'json-loader',
       },
     ],
   },
+  resolve: {
+    extensions: [
+      '.js',
+      '.jsx',
+      '.css',
+    ],
+  },
+  node: {
+    net: 'mock',
+    dns: 'mock',
+  },
   plugins: [
+    new ExtractTextPlugin('styles.css'),
     new AssetsPlugin({
       filename: 'assets.json',
       path: 'build/static',

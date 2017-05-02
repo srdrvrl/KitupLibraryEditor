@@ -12,6 +12,7 @@ const App = () => (
   <div>
     <Match exactly pattern="/" component={HomePage} />
     <Match pattern="/editor" component={EditorPage} />
+    <Match pattern="/editor/:id" component={EditorPage} />
     <Miss component={NotFoundPage} />
   </div>
 );
