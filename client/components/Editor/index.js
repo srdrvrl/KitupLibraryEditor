@@ -270,7 +270,7 @@ export default class Editor extends React.Component {
     console.log(this.state.library);
 
     //css parts
-    var imgUrl='http://content.wallpapers-room.com/presentationBig/Blue_by_TheBestIsaac.jpg';
+    var imgUrl='http://i.hizliresim.com/X0Rqz5.jpg';
     var imgHome='http://i.hizliresim.com/DP1g7Z.jpg';
     const page = {
       padding:'1px',
