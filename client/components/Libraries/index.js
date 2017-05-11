@@ -56,8 +56,8 @@ export default class Libraries extends React.Component {
     const styles = {
       li:{
         fontFamily: 'Oswald',
-        backgroundImage: 'url(http://i.hizliresim.com/1LOYqB.jpg) ',
-        backgroundRepeat: 'no-repeat',
+        backgroundImage: 'url(https://i.hizliresim.com/R0jvY6.jpg) ',
+        backgroundRepeat: 'x-repeat',
         borderRadius: '11px',
         fontSize: '1.5em',
         lineHeight: '40px',
@@ -112,7 +112,8 @@ export default class Libraries extends React.Component {
 
     var styles = {
       div1:{
-        background: '#C5EEEB',
+        backgroundImage: 'url(https://i.hizliresim.com/GBjJ22.jpg) ',
+
       },
 
       ul:{
@@ -124,16 +125,20 @@ export default class Libraries extends React.Component {
       },
 
       h1: {
-        color: 'blue',
+        color: '#FFD700',
         fontSize: '50px',
   fontFamily: 'Arvo',
   fontWeight: 'bold',
   textShadow: '2px 2px 0 #a43',
   lineHeight: '0.8em',
-  
+
   transform: 'scaleY(0.7)',
   margin:0,
   textAlign: 'center',
+      },
+      listI:{
+        color: '#FFD700',
+        textShadow: '1px 1px 0 blue',
       },
 
 
@@ -148,15 +153,17 @@ export default class Libraries extends React.Component {
           <h1 style={styles.h1}>Libraries</h1><br />
           <div style={{ overflow: 'auto', maxHeight: 400 }}>
             <ul style= {styles.ul}>
-                <li>
+                <li style={styles.listI}>
 
               {this.state.libraries.map(this.renderLibrary)}
                 </li>
             </ul>
             <br/>
           </div>
+          <div style={styles.listI}>
           { this.renderNewLibraryButton() }
-          <br /><br/>
+          </div>
+          <br />
           { this.renderLogoutButton() }
         </div>
       </div>
