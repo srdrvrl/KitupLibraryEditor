@@ -72,6 +72,8 @@ export default class Editor extends React.Component {
   saveLibrary() {
     const json = JSON.stringify(this.state.library);
     console.log(json);
+
+    window.prompt("Copy to clipboard: Ctrl+C, Enter", json);
     const base64 = new Buffer(json).toString('base64');
     const file = new Parse.File('data.json', { base64 });
     file.save().then(
